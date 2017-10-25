@@ -1,48 +1,42 @@
 package gameObjects;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
-public class GameBoard extends JFrame {
+public class GameBoard extends JFrame implements ActionListener {
+	
 
+	
 	private static final long serialVersionUID = 1L;
 
 	private static GameBoard gameBoardInstance;
 	
-	// Subviews
-	private Playspace playspace = new Playspace(new BorderLayout(3, 3));
-	
-	// Constraints
-	private GridBagConstraints playspaceConstraints = new GridBagConstraints(1, 1, 1, 1, 20.0, 20.0, GridBagConstraints.SOUTHEAST, 0, new Insets(1, 1, 1, 1), 1, 1);
-	private GridBagConstraints gameLabelConstraints = new GridBagConstraints(1, 1, 1, 1, 20.0, 20.0, GridBagConstraints.SOUTHWEST, 0, new Insets(1, 1, 1, 1), 1, 1);
-	
+	// Sub-views
+	private PlaySpace playSpace;
 	
 	private GameBoard(String s) {
 		super(s);
-		initialize();
 	}
 	
-	private void initialize() {
+	public void init() {
 
 		// Configure the the GameBoard
 		setSize(1500, 1000);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setLayout(new GridBagLayout());
 		setLocationRelativeTo(null);
 		
 		// Create the game Label
 		JLabel gameLabel = new JLabel("Agile Pursuit");
 		gameLabel.setForeground(Color.BLUE);
 		
-		getContentPane().add(playspace, playspaceConstraints);
-		getContentPane().add(gameLabel, gameLabelConstraints);
+		// Create the play space
+		playSpace = new PlaySpace(gameBoardInstance);
+		add(playSpace);
 		
 		setVisible(true);
 	}
@@ -52,5 +46,11 @@ public class GameBoard extends JFrame {
 			gameBoardInstance = new GameBoard("Agile Pursuit");
 		}
 		return gameBoardInstance;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO
+		
 	}
 }

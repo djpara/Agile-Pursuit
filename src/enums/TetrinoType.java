@@ -1,11 +1,12 @@
 package enums;
 
-public enum TetrinoType {
-	L1,
-	L2,
-	Z1,
-	Z2,
+public enum TetrinoType { 
+	NONE,
+	Z, 
+	S, 
 	I,
-	T,
-	SQUARE
+    T,
+    L,
+    J, 
+    SQUARE
 }
