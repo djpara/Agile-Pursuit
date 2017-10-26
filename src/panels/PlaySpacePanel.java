@@ -1,4 +1,4 @@
-package gameObjects;
+package panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,11 +11,15 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import enums.TetrinoType;
+import gameObjects.GameBoard;
+import gameObjects.Tetrino;
 import globalVariables.GlobalVariables;
 
-public class PlaySpace extends JPanel implements ActionListener {
+public class PlaySpacePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 2L;
+	
+	private GameBoard mGameBoard;
 	
 	private ArrayList<Tetrino> mPlayedTetrinos;
 	private Tetrino mSelectedTetrino;
@@ -26,7 +30,11 @@ public class PlaySpace extends JPanel implements ActionListener {
 	
 	private boolean mIsListening;
 	
-	public PlaySpace(GameBoard gameboard) {
+	public PlaySpacePanel(GameBoard gameBoard) {
+		this.mGameBoard = gameBoard;
+		this.setBackground(GlobalVariables.PLAYSPACE_BACK);
+		this.setPreferredSize(new Dimension(GlobalVariables.PLAY_SPACE_WIDTH, GlobalVariables.PLAY_SPACE_HEIGHT));
+		
 		mPlayedTetrinos = new ArrayList<Tetrino>();
 		mSelectedTetrino = new Tetrino();
 		
@@ -77,7 +85,7 @@ public class PlaySpace extends JPanel implements ActionListener {
 		for (int i = 0; i < GlobalVariables.PLAY_SPACE_HEIGHT; ++i) {
 			 for (int j = 0; j < GlobalVariables.PLAY_SPACE_WIDTH; ++j) {
 	                TetrinoType tetrinoType = tetrinoTypeAt(j, GlobalVariables.PLAY_SPACE_HEIGHT - i - 1);
-	                if (tetrinoType != TetrinoType.NONE)
+	                if (tetrinoType != TetrinoType.NONE && tetrinoType != null) // remove second check after fix
 	                    drawTetrinoBlock(g, 0 + j * getBlockWidth(),
 	                            playSpaceTop + i * getBlockHeight(), getColorForTetrinoType(tetrinoType));
 	            }
