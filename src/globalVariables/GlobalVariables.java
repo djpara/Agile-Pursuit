@@ -1,36 +1,15 @@
 package globalVariables;
 
 import java.awt.Color;
-import java.awt.Insets;
 
 public class GlobalVariables {
 
 	// Game board frame variables 
-	public static final int GAME_BOARD_WIDTH 		= 1000;
+	public static final int GAME_BOARD_WIDTH 		= 1500;
 	public static final int GAME_BOARD_HEIGHT		= 1000;
 	
-	// Score and time panel variables
-	public static final int SCORE_AND_TIME_WIDTH	= 75;
-	public static final int SCORE_AND_TIME_HEIGHT	= 925;
-	
-	// Epic/Inventory panel variables
-	public static final int EPIC_INVENTORY_WIDTH	= 600;
-	public static final int EPIC_INVENTORY_HEIGHT	= 925;
-	
-	// Trivia panel variables
-	public static final int TRIVIA_WIDTH			= 325;
-	public static final int TRIVIA_HEIGHT			= 925;
-	
-	// Player title panel variables
-	public static final int PLAYER_TITLE_WIDTH		= 600;
-	public static final int PLAYER_TITLE_HEIGHT		= 75;
-	
-	// Play space panel variables
-	public static final int PLAY_SPACE_WIDTH		= 600;
-	public static final int PLAY_SPACE_HEIGHT		= 925;
-	
 	// Tetrino colors
-	public static final Color NONE_COLOR			= new Color( 255, 255, 255 );
+	public static final Color NONE_COLOR				= new Color( 255, 255, 255 );
 	public static final Color Z_COLOR				= new Color(  65, 251,  48 );
 	public static final Color S_COLOR				= new Color(  60, 254, 254 );
 	public static final Color I_COLOR				= new Color( 251, 128,  35 );
@@ -40,10 +19,12 @@ public class GlobalVariables {
 	public static final Color SQUARE_COLOR			= new Color( 250,  20,  27 );
 	
 	// Panel background colors
-	public static final Color PLAYSPACE_BACK		= new Color( 210, 213, 219 );
-	public static final Color DEFAULT_BACK			= new Color( 184, 184, 184 );
+	public static final Color L_R_PANEL_BACK			= new Color(  45,  91, 142 );//( 155, 196, 238 );
+	public static final Color DEFAULT_BACK			= new Color( 255, 250, 247 );
+	public static final Color GAME_BOARD_BACK		= new Color(  45,  91, 142 );
 	
-	// Insets
-	public static final Insets insets				= new Insets(2, 2, 2, 2);
+	// Cushion
+	public static final int L_R_CUSHION				= 4;
+	public static final int CUSHION					= 4;
 	
 }
