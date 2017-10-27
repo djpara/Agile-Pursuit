@@ -1,4 +1,4 @@
-package gameObjects;
+package panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,11 +11,20 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import enums.TetrinoType;
+import gameObjects.GameBoardManager;
+import gameObjects.Tetrino;
 import globalVariables.GlobalVariables;
 
-public class PlaySpace extends JPanel implements ActionListener {
+public class PlaySpacePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 2L;
+	
+	private GameBoardManager mGameBoardManager;
+	
+	private JPanel mParentPanel;
+	
+	private int mPreferredWidth;
+	private int mPreferredHeight;
 	
 	private ArrayList<Tetrino> mPlayedTetrinos;
 	private Tetrino mSelectedTetrino;
@@ -26,9 +35,14 @@ public class PlaySpace extends JPanel implements ActionListener {
 	
 	private boolean mIsListening;
 	
-	public PlaySpace(GameBoard gameboard) {
-		mPlayedTetrinos = new ArrayList<Tetrino>();
-		mSelectedTetrino = new Tetrino();
+	public PlaySpacePanel(GameBoardManager gameBoardManager, JPanel parentPanel) {
+		this.mGameBoardManager = gameBoardManager;
+		this.mParentPanel = parentPanel;
+		
+		this.mPlayedTetrinos = new ArrayList<Tetrino>();
+		this.mSelectedTetrino = new Tetrino();
+		
+		this.configurePanel();
 		
 		// TESTING = Fill the array
 		mPlayedTetrinos.add(new Tetrino(TetrinoType.I));
@@ -39,7 +53,19 @@ public class PlaySpace extends JPanel implements ActionListener {
 		mPlayedTetrinos.add(new Tetrino(TetrinoType.J));
 		mPlayedTetrinos.add(new Tetrino(TetrinoType.SQUARE));
 		
-		mPlaySpace = new TetrinoType[ GlobalVariables.PLAY_SPACE_WIDTH * GlobalVariables.PLAY_SPACE_HEIGHT ];
+		mPlaySpace = new TetrinoType[ mPreferredWidth * mPreferredHeight ];
+	}
+	
+	/**
+	 * Configures the panel - background color, sets the size
+	 */
+	private void configurePanel() {
+		this.setBackground(GlobalVariables.DEFAULT_BACK);
+		
+		mPreferredWidth = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
+		mPreferredHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION);
+		
+		this.setPreferredSize(new Dimension(mPreferredWidth, mPreferredHeight));
 	}
 	
 	/**
@@ -47,7 +73,7 @@ public class PlaySpace extends JPanel implements ActionListener {
 	 * @return
 	 */
 	private int getBlockWidth() {
-		return (int) getSize().getWidth()/GlobalVariables.PLAY_SPACE_WIDTH;
+		return (int) getSize().getWidth()/mPreferredWidth;
 	}
 	
 	/**
@@ -55,7 +81,7 @@ public class PlaySpace extends JPanel implements ActionListener {
 	 * @return
 	 */
 	private int getBlockHeight() {
-		return (int) getSize().getHeight()/GlobalVariables.PLAY_SPACE_HEIGHT;
+		return (int) getSize().getHeight()/mPreferredHeight;
 	}
 	
 	/**
@@ -65,19 +91,19 @@ public class PlaySpace extends JPanel implements ActionListener {
 	 * @return
 	 */
 	TetrinoType tetrinoTypeAt(int x, int y) {
-		return mPlaySpace[(y * GlobalVariables.PLAY_SPACE_WIDTH) +  x];
+		return mPlaySpace[(y * mPreferredWidth) +  x];
 	}
 	
 	public void paint(Graphics g) {
 		super.paint(g);
 		
 		Dimension size = getSize();
-		int playSpaceTop = (int) size.getHeight() - GlobalVariables.PLAY_SPACE_HEIGHT * getBlockHeight();
+		int playSpaceTop = (int) size.getHeight() - mPreferredHeight * getBlockHeight();
 		
-		for (int i = 0; i < GlobalVariables.PLAY_SPACE_HEIGHT; ++i) {
-			 for (int j = 0; j < GlobalVariables.PLAY_SPACE_WIDTH; ++j) {
-	                TetrinoType tetrinoType = tetrinoTypeAt(j, GlobalVariables.PLAY_SPACE_HEIGHT - i - 1);
-	                if (tetrinoType != TetrinoType.NONE)
+		for (int i = 0; i < mPreferredHeight; ++i) {
+			 for (int j = 0; j < mPreferredWidth; ++j) {
+	                TetrinoType tetrinoType = tetrinoTypeAt(j, mPreferredHeight - i - 1);
+	                if (tetrinoType != TetrinoType.NONE && tetrinoType != null) // remove second check after fix
 	                    drawTetrinoBlock(g, 0 + j * getBlockWidth(),
 	                            playSpaceTop + i * getBlockHeight(), getColorForTetrinoType(tetrinoType));
 	            }
@@ -89,7 +115,7 @@ public class PlaySpace extends JPanel implements ActionListener {
                 int x = mSelectedTetrinoXCoordinate + mSelectedTetrino.getX(i);
                 int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i);
                 drawTetrinoBlock(g, 0 + x * getBlockWidth(),
-                        playSpaceTop + (GlobalVariables.PLAY_SPACE_HEIGHT - y - 1) * getBlockHeight(),
+                        playSpaceTop + (mPreferredHeight - y - 1) * getBlockHeight(),
                         getColorForTetrinoType(tetrinoType));
             }
         }
@@ -142,7 +168,7 @@ public class PlaySpace extends JPanel implements ActionListener {
 	 * Clears the play space and moves all of the played Tetrinos to the loading dock 
 	 */
     private void clearPlaySpace() {
-        for (int i = 0; i < GlobalVariables.PLAY_SPACE_WIDTH * GlobalVariables.PLAY_SPACE_HEIGHT; ++i) {
+        for (int i = 0; i < mPreferredWidth * mPreferredHeight; ++i) {
             mPlaySpace[i] = TetrinoType.NONE;
         }
         
@@ -204,9 +230,9 @@ public class PlaySpace extends JPanel implements ActionListener {
 			mSelectedTetrinoYCoordinate = selectedTetrinoYCoordinate - tetrino.getY(i);
 			
 			if (selectedTetrinoXCoordinate < 0 
-				|| selectedTetrinoXCoordinate >= GlobalVariables.PLAY_SPACE_WIDTH 
+				|| selectedTetrinoXCoordinate >= mPreferredWidth 
 				|| selectedTetrinoYCoordinate < 0
-				|| selectedTetrinoYCoordinate >= GlobalVariables.PLAY_SPACE_HEIGHT) {
+				|| selectedTetrinoYCoordinate >= mPreferredHeight) {
 				return;
 			}
 			if (tetrinoTypeAt(selectedTetrinoXCoordinate, selectedTetrinoYCoordinate) != TetrinoType.NONE) {

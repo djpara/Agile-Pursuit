@@ -1,56 +1,81 @@
 package gameObjects;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
-public class GameBoard extends JFrame implements ActionListener {
-	
+import globalVariables.GlobalVariables;
+import panels.LeftPanel;
+import panels.RightPanel;
 
+public class GameBoard extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	private static GameBoard gameBoardInstance;
-	
-	// Sub-views
-	private PlaySpace playSpace;
+	// Singleton Game Board instance
+	private static GameBoard mGameBoardInstance;
 	
 	private GameBoard(String s) {
 		super(s);
 	}
 	
 	public void init() {
+		
+		this.configureFrame();
+		
+		this.addPanelsRL();
+		
+		this.presentFrame();
+	}
+	
+	/**
+	 * Configures the main frame
+	 */
+	private void configureFrame() {
+		// Set the layout style
+		this.getContentPane().setLayout(new FlowLayout());
+		
+		// Set background color
+		this.getContentPane().setBackground(GlobalVariables.GAME_BOARD_BACK);
 
 		// Configure the the GameBoard
-		setSize(1500, 1000);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	}
+	
+	/**
+	 * Creates and adds the right and left panels to the main game board screen
+	 */
+	private void addPanelsRL() {
+		// Separate the frame in two
+		LeftPanel leftPanel = new LeftPanel();
+		RightPanel rightPanel = new RightPanel();
+				
+		// Add the two panels
+		add(leftPanel);
+		add(rightPanel);
+	}
+	
+	/**
+	 * Presents and displays the main frame
+	 */
+	private void presentFrame() {
+		// Packs the window proportionately given preferred panel sizes
+		pack();
+		
+		// Centers and displays the window on user's screen
 		setLocationRelativeTo(null);
-		
-		// Create the game Label
-		JLabel gameLabel = new JLabel("Agile Pursuit");
-		gameLabel.setForeground(Color.BLUE);
-		
-		// Create the play space
-		playSpace = new PlaySpace(gameBoardInstance);
-		add(playSpace);
-		
 		setVisible(true);
 	}
 	
+	/**
+	 * Returns the static reference of the main Game Board - Singleton Pattern
+	 * @return GameBoard
+	 */
 	public static GameBoard getGameBoardInstance() {
-		if (gameBoardInstance == null) {
-			gameBoardInstance = new GameBoard("Agile Pursuit");
+		if (mGameBoardInstance == null) {
+			mGameBoardInstance = new GameBoard("Agile Pursuit");
 		}
-		return gameBoardInstance;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO
-		
+		return mGameBoardInstance;
 	}
 }
