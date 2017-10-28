@@ -2,8 +2,8 @@ package enums;
 
 public enum TetrinoType { 
 	NONE,
-	Z, 
 	S, 
+	Z, 
 	I,
     T,
     L,

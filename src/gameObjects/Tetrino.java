@@ -1,5 +1,7 @@
 package gameObjects;
 
+import java.util.Random;
+
 import enums.TetrinoType;
 
 public class Tetrino {
@@ -7,20 +9,22 @@ public class Tetrino {
     private TetrinoType mShape;
     private int mCoordinates[][];
     private int[][][] mCoordinatesTable;
+    
+    private Random mRandom;
 
     public Tetrino(TetrinoType tetrinoType) {
-    	mCoordinates = new int[4][2];
-    	setShape(tetrinoType);
+    		mCoordinates = new int[4][2];
+    		setTetrinoType(tetrinoType);
     }
     
     public Tetrino() {
 
         mCoordinates = new int[4][2];
-        setShape(TetrinoType.NONE);
+        setTetrinoType(TetrinoType.NONE);
 
     }
 
-    public void setShape(TetrinoType tetrinoType) {
+    public void setTetrinoType(TetrinoType tetrinoType) {
 
         mCoordinatesTable = new int[][][] {
                 { {  0,  0 }, {  0,  0 }, {  0,  0 }, {  0,  0 } },
@@ -43,23 +47,30 @@ public class Tetrino {
     }
 
     private void setX(int i, int x) { 
-    	mCoordinates[i][0] = x;   	
+    		mCoordinates[i][0] = x;   	
     }
     
     private void setY(int i, int y) { 
-    	mCoordinates[i][1] = y; 
+    		mCoordinates[i][1] = y; 
     }
     
     public int getX(int i) {
-    	return mCoordinates[i][0];
+    		return mCoordinates[i][0];
     }
     
     public int getY(int i) {
-    	return mCoordinates[i][1];
+    		return mCoordinates[i][1];
     }
     
     public TetrinoType getShape()  {
-    	return mShape;
+    		return mShape;
+    }
+    
+    public void setRandomTetrino() {
+    		mRandom = new Random();
+    		int x = Math.abs(mRandom.nextInt()) % 7 + 1;
+    		TetrinoType[] values = TetrinoType.values();
+    		setTetrinoType(values[x]);
     }
 
     public int minX() {
