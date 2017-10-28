@@ -1,5 +1,6 @@
 package gameObjects;
 
+import java.util.List;
 
 public class TriviaCard {
 	
@@ -22,17 +23,17 @@ public class TriviaCard {
 		correct = list.get(1);
 
 		if (list.size()-1 > MAX_CHOICES)			
-			allAnswers = new String[MAX_CHOICES]; 
+			allChoices = new String[MAX_CHOICES]; 
 		else
-			allAnswers = new String[list.size()-1];
+			allChoices = new String[list.size()-1];
 		
-		int correctIndex = (int) (Math.random() * allAnswers.length);
+		int correctIndex = (int) (Math.random() * allChoices.length);
 		int listIndex = 2;
-		for (int i=0; i < allAnswers.length; i++){
+		for (int i=0; i < allChoices.length; i++){
 			if (i == correctIndex){
-				allAnswers[i] = correct;
+				allChoices[i] = correct;
 			} else {
-			allAnswers[i] = list.get(listIndex);
+			allChoices[i] = list.get(listIndex);
 			listIndex = listIndex + 1;
 			}
 		}
@@ -54,7 +55,7 @@ public class TriviaCard {
 	 * Getter for the array of all possible answers
 	 * @return allAnswers as a string-array
 	 */
-	public String[] getAllAnswers() { return allAnswers.clone(); }
+	public String[] getAllAnswers() { return allChoices.clone(); }
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -62,8 +63,8 @@ public class TriviaCard {
 	@Override
 	public String toString() {
 		String str = "Question: " + question;
-		for (int i = 0; i < allAnswers.length; i++)
-			str = str + "Answer " + i + ":" + allAnswers[i] + "\n";
+		for (int i = 0; i < allChoices.length; i++)
+			str = str + "Answer " + i + ":" + allChoices[i] + "\n";
 		return question + "?\n"
 			+ "Correct:" + correct + "\n"
 			+ str;
