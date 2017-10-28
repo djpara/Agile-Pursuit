@@ -3,12 +3,9 @@ package panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -22,8 +19,8 @@ public class PlaySpacePanel extends JPanel {
 	private static final long serialVersionUID = 2L;
 	
 	// Set play space height and width allows for calculating block sizes. 24x31 playspace creates a block of 30x30
-	private final int playSpaceWidth = 24;
-    private final int playSpaceHeight = 31;
+	private final int mPlaySpaceWidth = 24;
+    private final int mPlaySpaceHeight = 31;
 	
 	private GameBoardManager mGameBoardManager;
 	
@@ -43,6 +40,7 @@ public class PlaySpacePanel extends JPanel {
 	
 	public PlaySpacePanel(GameBoardManager gameBoardManager, JPanel parentPanel) {
 		setFocusable(true);
+		mIsListening = true;
 		
 		mGameBoardManager = gameBoardManager;
 		mParentPanel = parentPanel;
@@ -61,7 +59,7 @@ public class PlaySpacePanel extends JPanel {
 
 		getNextTetrinoFromInventory();
 		
-		mPlaySpace = new TetrinoType[ playSpaceWidth * playSpaceHeight ];
+		mPlaySpace = new TetrinoType[ mPlaySpaceWidth * mPlaySpaceHeight ];
 		
 		addKeyListener(new Adapter());
 
@@ -87,7 +85,7 @@ public class PlaySpacePanel extends JPanel {
 	 * @return
 	 */
 	private int getBlockWidth() {
-		return (int) getSize().getWidth()/playSpaceWidth;
+		return (int) getSize().getWidth()/mPlaySpaceWidth;
 	}
 	
 	/**
@@ -95,7 +93,7 @@ public class PlaySpacePanel extends JPanel {
 	 * @return
 	 */
 	private int getBlockHeight() {
-		return (int) getSize().getHeight()/playSpaceHeight;
+		return (int) getSize().getHeight()/mPlaySpaceHeight;
 	}
 	
 	/**
@@ -105,21 +103,21 @@ public class PlaySpacePanel extends JPanel {
 	 * @return
 	 */
 	TetrinoType tetrinoTypeAt(int x, int y) {
-		return mPlaySpace[(y * playSpaceWidth) +  x];
+		return mPlaySpace[(y * mPlaySpaceWidth) +  x];
 	}
 	
 	public void paint(Graphics g) {
 		super.paint(g);
 		
 		Dimension size = getSize();
-		int playSpaceMiddle = (int) (size.getHeight()/2);
+		int playSpaceTop = (int) (size.getHeight() - mPlaySpaceHeight * getBlockHeight());
 		
-		for (int i = 0; i < playSpaceHeight; ++i) {
-			 for (int j = 0; j < playSpaceWidth; ++j) {
-	                TetrinoType tetrinoType = tetrinoTypeAt(j, playSpaceHeight - i - 1);
+		for (int i = 0; i < mPlaySpaceHeight; ++i) {
+			 for (int j = 0; j < mPlaySpaceWidth; ++j) {
+	                TetrinoType tetrinoType = tetrinoTypeAt(j, mPlaySpaceHeight - i - 1);
 	                if (tetrinoType != TetrinoType.NONE) {
 	                    drawTetrinoBlock(g, 0 + j * getBlockWidth(),
-	                            playSpaceMiddle + i * getBlockHeight(), getColorForTetrinoType(tetrinoType));
+	                            playSpaceTop + i * getBlockHeight(), getColorForTetrinoType(tetrinoType));
 	                }
 	          }
 		}
@@ -130,8 +128,8 @@ public class PlaySpacePanel extends JPanel {
                 int x = mSelectedTetrinoXCoordinate + mSelectedTetrino.getX(i);
                 int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i);
                 
-                int drawX = playSpaceMiddle + x * getBlockWidth();
-                int drawY = playSpaceMiddle + (0 - y - 1) * getBlockHeight();
+                int drawX = 0 + x * getBlockWidth();
+                int drawY = playSpaceTop + (mPlaySpaceHeight - y) * getBlockHeight();
                 
                 drawTetrinoBlock(g, drawX, drawY, getColorForTetrinoType(tetrinoType));
             }
@@ -185,7 +183,7 @@ public class PlaySpacePanel extends JPanel {
 	 * Clears the play space and moves all of the played Tetrinos to the inventory 
 	 */
     private void clearPlaySpace() {
-        for (int i = 0; i < playSpaceWidth * playSpaceHeight; ++i) {
+        for (int i = 0; i < mPlaySpaceWidth * mPlaySpaceHeight; ++i) {
             mPlaySpace[i] = TetrinoType.NONE;
         }
         
@@ -201,10 +199,16 @@ public class PlaySpacePanel extends JPanel {
     		// TESTING - Simulates returning mSelectedTetrino to the inventory and grabbing next tetrino in line 
     		mInventorySimulationArray.add(mSelectedTetrino);
     		getNextTetrinoFromInventory();
+    		repaint();
     }
     
     private void getNextTetrinoFromInventory() {
-    		mSelectedTetrino = mInventorySimulationArray.get(0);
+
+    	mSelectedTetrino = mInventorySimulationArray.remove(0);
+    	
+    	mSelectedTetrinoXCoordinate = mPlaySpaceWidth / 2 + 1;
+    	mSelectedTetrinoYCoordinate = mPlaySpaceHeight / 2 + 1;
+    		
     }
     
     private void getNextTetrinoFromPlayed() {
@@ -220,18 +224,21 @@ public class PlaySpacePanel extends JPanel {
 	 */
 	private void moveTetrino(Tetrino tetrino, int selectedTetrinoXCoordinate, int selectedTetrinoYCoordinate) {
 		for (int i = 0; i < 4; ++i) {
-			mSelectedTetrinoXCoordinate = selectedTetrinoXCoordinate + tetrino.getX(i);
-			mSelectedTetrinoYCoordinate = selectedTetrinoYCoordinate - tetrino.getY(i);
+
+			mSelectedTetrinoXCoordinate = selectedTetrinoXCoordinate;
+			mSelectedTetrinoYCoordinate = selectedTetrinoYCoordinate;
 			
 			if (selectedTetrinoXCoordinate < 0 
-				|| selectedTetrinoXCoordinate >= playSpaceWidth 
+				|| selectedTetrinoXCoordinate >= mPlaySpaceWidth 
 				|| selectedTetrinoYCoordinate < 0
-				|| selectedTetrinoYCoordinate >= playSpaceHeight) {
+				|| selectedTetrinoYCoordinate >= mPlaySpaceHeight) {
 				return;
 			}
+			
 			if (tetrinoTypeAt(selectedTetrinoXCoordinate, selectedTetrinoYCoordinate) != TetrinoType.NONE) {
 				return;
 			}
+			
 		}
 		
 		mSelectedTetrino = tetrino;
@@ -244,6 +251,12 @@ public class PlaySpacePanel extends JPanel {
 	 */
 	private void placeTetrino() {
 		// TODO
+		
+		for (int i = 0; i < 4; ++i) {
+            int x = mSelectedTetrinoXCoordinate + mSelectedTetrino.getX(i);
+            int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i) - 1;
+            mPlaySpace[(y * mPlaySpaceWidth) + x] = mSelectedTetrino.getShape();
+        }
 		
 		// TESTING - replaces mSelectedTetrino with next first item in mInventorySimulationArray
 		mPlayedTetrinos.add(mSelectedTetrino);
@@ -275,10 +288,10 @@ public class PlaySpacePanel extends JPanel {
 	    			moveTetrino(mSelectedTetrino, mSelectedTetrinoXCoordinate + 1, mSelectedTetrinoYCoordinate);
 	    			break;
 	    		case KeyEvent.VK_DOWN:
-	    			moveTetrino(mSelectedTetrino, mSelectedTetrinoXCoordinate, mSelectedTetrinoYCoordinate + 1);
+	    			moveTetrino(mSelectedTetrino, mSelectedTetrinoXCoordinate, mSelectedTetrinoYCoordinate - 1);
 	    			break;
 	    		case KeyEvent.VK_UP:
-	    			moveTetrino(mSelectedTetrino, mSelectedTetrinoXCoordinate, mSelectedTetrinoYCoordinate - 1);
+	    			moveTetrino(mSelectedTetrino, mSelectedTetrinoXCoordinate, mSelectedTetrinoYCoordinate + 1);
 	    			break;
 	    		case KeyEvent.VK_SPACE:
 	    			moveTetrino(mSelectedTetrino.rotateRight(), mSelectedTetrinoXCoordinate, mSelectedTetrinoYCoordinate);
