@@ -51,8 +51,9 @@ public class PlaySpacePanel extends JPanel {
 		configurePanel();
 		
 		// TESTING = Fill the array
-		Tetrino newTetrino = new Tetrino();
+		Tetrino newTetrino;
 		for (int i = 0; i < 15; ++i) {
+			newTetrino = new Tetrino();
 			newTetrino.setRandomTetrino();
 			mInventorySimulationArray.add(newTetrino);
 		}
@@ -202,8 +203,12 @@ public class PlaySpacePanel extends JPanel {
     		repaint();
     }
     
+    /**
+     * 
+     */
     private void getNextTetrinoFromInventory() {
 
+    	// TESTING - 
     	mSelectedTetrino = mInventorySimulationArray.remove(0);
     	
     	mSelectedTetrinoXCoordinate = mPlaySpaceWidth / 2 + 1;
@@ -211,6 +216,9 @@ public class PlaySpacePanel extends JPanel {
     		
     }
     
+    /**
+     * 
+     */
     private void getNextTetrinoFromPlayed() {
     	int nextTetrinoIndex = mPlayedTetrinos.indexOf(mSelectedTetrino) + 1;
 		mSelectedTetrino = mPlayedTetrinos.get(nextTetrinoIndex);
