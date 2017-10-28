@@ -21,8 +21,8 @@ public class TriviaCard {
 		question = list.get(0);
 		correct = list.get(1);
 
-		if (list.size()-1 > MAX_QUESTIONS)			
-			allAnswers = new String[MAX_QUESTIONS]; 
+		if (list.size()-1 > MAX_CHOICES)			
+			allAnswers = new String[MAX_CHOICES]; 
 		else
 			allAnswers = new String[list.size()-1];
 		
