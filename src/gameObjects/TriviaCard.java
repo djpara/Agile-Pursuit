@@ -55,7 +55,7 @@ public class TriviaCard {
 	 * Getter for the array of all possible answers
 	 * @return allAnswers as a string-array
 	 */
-	public String[] getAllAnswers() { return allChoices.clone(); }
+	public String[] getAllChoices() { return allChoices.clone(); }
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
