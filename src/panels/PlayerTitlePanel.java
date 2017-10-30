@@ -2,6 +2,7 @@ package panels;
 
 import java.awt.Dimension;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gameObjects.GameBoard;
@@ -21,6 +22,7 @@ public class PlayerTitlePanel extends JPanel {
 		this.mParentPanel = parentPanel;
 		
 		this.configurePanel();
+		this.displayName(getPlayerName());
 	}
 	
 	/**
@@ -33,6 +35,16 @@ public class PlayerTitlePanel extends JPanel {
 		int preferredHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION);
 		
 		this.setPreferredSize(new Dimension(preferredWidth, preferredHeight));
+	}
+	
+	private String getPlayerName(){
+		String input = JOptionPane.showInputDialog("Enter your name: ");
+		return input;
+	}
+	private void displayName(String s){
+		drawingComponent DC = new drawingComponent(s);
+		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),(int) (mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION)));
+		add(DC);
 	}
 	
 }
