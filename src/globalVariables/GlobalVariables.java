@@ -5,8 +5,8 @@ import java.awt.Color;
 public class GlobalVariables {
 
 	// Game board frame variables 
-	public static final int GAME_BOARD_WIDTH 		= 1500;
-	public static final int GAME_BOARD_HEIGHT		= 1000;
+	public static final int GAME_BOARD_WIDTH 		= 990;
+	public static final int GAME_BOARD_HEIGHT		= 660;
 	
 	// Tetrino colors
 	public static final Color NONE_COLOR				= new Color( 255, 255, 255 );
