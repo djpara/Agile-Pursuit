@@ -49,6 +49,7 @@ public class PlaySpacePanel extends JPanel {
 		mInventorySimulationArray = new ArrayList<Tetrino>();
 		
 		configurePanel();
+		drawCross();
 		
 		// TESTING = Fill the array
 		Tetrino newTetrino;
@@ -79,6 +80,12 @@ public class PlaySpacePanel extends JPanel {
 		int mPanelHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION);
 		
 		setPreferredSize(new Dimension(mPanelWidth, mPanelHeight));
+	}
+	
+	private void drawCross(){
+		drawingComponent2 DC = new drawingComponent2();
+		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),(int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION)));
+		add(DC);
 	}
 	
 	/**
