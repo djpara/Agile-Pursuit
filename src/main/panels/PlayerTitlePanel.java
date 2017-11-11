@@ -35,7 +35,7 @@ public class PlayerTitlePanel extends JPanel {
 		GlobalVariables.PLAYER_TITLE_PANEL_WIDTH = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
 		GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT = (int)(mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION);
 		
-		this.setPreferredSize(new Dimension(GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT, GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT));
+		this.setPreferredSize(new Dimension(GlobalVariables.PLAYER_TITLE_PANEL_WIDTH, GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT));
 	}
 	
 	private String getPlayerName(){
