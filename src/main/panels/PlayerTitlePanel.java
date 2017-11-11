@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import jdk.nashorn.internal.objects.Global;
 import main.drawingUtil.DrawingComponent;
 import main.gameObjects.GameBoardManager;
 import main.globalVariables.GlobalVariables;
@@ -31,10 +32,10 @@ public class PlayerTitlePanel extends JPanel {
 	private void configurePanel() {
 		this.setBackground(GlobalVariables.DEFAULT_BACK);
 		
-		int preferredWidth = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
-		int preferredHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION);
+		GlobalVariables.PLAYER_TITLE_PANEL_WIDTH = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
+		GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT = (int)(mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION);
 		
-		this.setPreferredSize(new Dimension(preferredWidth, preferredHeight));
+		this.setPreferredSize(new Dimension(GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT, GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT));
 	}
 	
 	private String getPlayerName(){

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import jdk.nashorn.internal.objects.Global;
 import main.drawingUtil.DrawingComponent2;
 import main.enums.TetrinoType;
 import main.gameObjects.GameBoardManager;
@@ -77,10 +78,10 @@ public class PlaySpacePanel extends JPanel {
 	private void configurePanel() {
 		setBackground(GlobalVariables.DEFAULT_BACK);
 		
-		int mPanelWidth = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
-		int mPanelHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION);
+		GlobalVariables.PLAY_SPACE_PANEL_WIDTH = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
+		GlobalVariables.PLAY_SPACE_PANEL_HEIGHT = (int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION);
 		
-		setPreferredSize(new Dimension(mPanelWidth, mPanelHeight));
+		setPreferredSize(new Dimension(GlobalVariables.PLAY_SPACE_PANEL_WIDTH, GlobalVariables.PLAY_SPACE_PANEL_HEIGHT));
 	}
 	
 	private void drawCross(){
