@@ -6,13 +6,13 @@ public class GlobalVariables {
 
 	// Game board frame variables 
 	public static final int GAME_BOARD_WIDTH 		= 990;
-	public static final int GAME_BOARD_HEIGHT		= 660;
+	public static final int GAME_BOARD_HEIGHT		= 635;
 
 	// Panel sizes - variable
-	public static int PLAYER_TITLE_PANEL_WIDTH		= 487;
+	public static int PLAYER_TITLE_PANEL_WIDTH		= 486;
 	public static int PLAYER_TITLE_PANEL_HEIGHT		= 28;
-	public static int PLAY_SPACE_PANEL_WIDTH		= 487;
-	public static int PLAY_SPACE_PANEL_HEIGHT		= 619;
+	public static int PLAY_SPACE_PANEL_WIDTH		= 486;
+	public static int PLAY_SPACE_PANEL_HEIGHT		= 594;
 	
 	// Tetrino colors
 	public static final Color NONE_COLOR				= new Color( 255, 255, 255 );
@@ -25,7 +25,7 @@ public class GlobalVariables {
 	public static final Color SQUARE_COLOR			= new Color( 250,  20,  27 );
 	
 	// Panel background colors
-	public static final Color L_R_PANEL_BACK			= new Color(  45,  91, 142 );//( 155, 196, 238 );
+	public static final Color L_R_PANEL_BACK		= new Color(  45,  91, 142 );//( 155, 196, 238 );
 	public static final Color DEFAULT_BACK			= new Color( 255, 250, 247 );
 	public static final Color GAME_BOARD_BACK		= new Color(  45,  91, 142 );
 	
