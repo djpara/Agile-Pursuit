@@ -121,7 +121,8 @@ public class PlaySpacePanel extends JPanel {
 		
 		Dimension size = getSize();
 		int playSpaceTop = (int) (size.getHeight() - mPlaySpaceHeight * getBlockHeight());
-		
+
+		// Draws the entire playspace - does not draw NONE tiles
 		for (int i = 0; i < mPlaySpaceHeight; ++i) {
 			 for (int j = 0; j < mPlaySpaceWidth; ++j) {
 	                TetrinoType tetrinoType = tetrinoTypeAt(j, mPlaySpaceHeight - i - 1);
@@ -131,7 +132,8 @@ public class PlaySpacePanel extends JPanel {
 	                }
 	          }
 		}
-		
+
+		// Draws the current tetrino piece that's being moved around
 		TetrinoType tetrinoType = mSelectedTetrino.getShape(); 
 		if (tetrinoType != TetrinoType.NONE) {
             for (int i = 0; i < 4; ++i) {
@@ -240,6 +242,16 @@ public class PlaySpacePanel extends JPanel {
 	 * @param selectedTetrinoYCoordinate
 	 */
 	private void moveTetrino(Tetrino tetrino, int selectedTetrinoXCoordinate, int selectedTetrinoYCoordinate) {
+
+		for (int i = 0; i < 4; ++i) {
+			if (selectedTetrinoXCoordinate < 0
+					|| selectedTetrinoXCoordinate > mPlaySpaceWidth + 1
+					|| selectedTetrinoYCoordinate < 0
+					|| selectedTetrinoYCoordinate > mPlaySpaceHeight) {
+				return;
+			}
+		}
+
 		for (int i = 0; i < 4; ++i) {
 
 			mSelectedTetrinoXCoordinate = selectedTetrinoXCoordinate;
@@ -270,7 +282,7 @@ public class PlaySpacePanel extends JPanel {
 		
 		for (int i = 0; i < 4; ++i) {
             int x = mSelectedTetrinoXCoordinate + mSelectedTetrino.getX(i);
-            int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i) - 1;
+            int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i) + 1;
             mPlaySpace[(y * mPlaySpaceWidth) + x] = mSelectedTetrino.getShape();
         }
 		
