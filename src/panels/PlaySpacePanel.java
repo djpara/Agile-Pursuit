@@ -83,8 +83,9 @@ public class PlaySpacePanel extends JPanel {
 	}
 	
 	private void drawCross(){
-		drawingComponent2 DC = new drawingComponent2();
-		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),(int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION)));
+		DrawingComponent2 DC = new DrawingComponent2();
+		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),
+				(int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION)));
 		add(DC);
 	}
 	
@@ -244,9 +245,9 @@ public class PlaySpacePanel extends JPanel {
 			mSelectedTetrinoYCoordinate = selectedTetrinoYCoordinate;
 			
 			if (selectedTetrinoXCoordinate < 0 
-				|| selectedTetrinoXCoordinate >= mPlaySpaceWidth 
+				|| selectedTetrinoXCoordinate >= mPlaySpaceWidth + 1
 				|| selectedTetrinoYCoordinate < 0
-				|| selectedTetrinoYCoordinate >= mPlaySpaceHeight) {
+				|| selectedTetrinoYCoordinate >= mPlaySpaceHeight + 1) {
 				return;
 			}
 			
@@ -262,7 +263,6 @@ public class PlaySpacePanel extends JPanel {
 	
 	/**
 	 * Sets the Tetrinos to the play space
-	 * @param tetrino
 	 */
 	private void placeTetrino() {
 		// TODO

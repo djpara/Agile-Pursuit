@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import gameObjects.GameBoard;
 import gameObjects.GameBoardManager;
 import globalVariables.GlobalVariables;
 
@@ -42,7 +41,7 @@ public class PlayerTitlePanel extends JPanel {
 		return input;
 	}
 	private void displayName(String s){
-		drawingComponent DC = new drawingComponent(s);
+		DrawingComponent DC = new DrawingComponent(s);
 		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),(int) (mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION)));
 		add(DC);
 	}
