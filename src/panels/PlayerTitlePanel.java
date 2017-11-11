@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import drawingUtil.DrawingComponent;
 import gameObjects.GameBoardManager;
 import globalVariables.GlobalVariables;
 

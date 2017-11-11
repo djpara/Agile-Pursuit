@@ -1,4 +1,4 @@
-package panels;
+package drawingUtil;
 
 import java.awt.Font;
 import java.awt.Graphics;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import drawingUtil.DrawingComponent2;
 import enums.TetrinoType;
 import gameObjects.GameBoardManager;
 import gameObjects.Tetrino;
