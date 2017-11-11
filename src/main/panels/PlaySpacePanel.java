@@ -77,10 +77,7 @@ public class PlaySpacePanel extends JPanel {
 	 */
 	private void configurePanel() {
 		setBackground(GlobalVariables.DEFAULT_BACK);
-		
-		GlobalVariables.PLAY_SPACE_PANEL_WIDTH = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
-		GlobalVariables.PLAY_SPACE_PANEL_HEIGHT = (int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION);
-		
+
 		setPreferredSize(new Dimension(GlobalVariables.PLAY_SPACE_PANEL_WIDTH, GlobalVariables.PLAY_SPACE_PANEL_HEIGHT));
 	}
 	

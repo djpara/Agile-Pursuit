@@ -9,10 +9,10 @@ public class GlobalVariables {
 	public static final int GAME_BOARD_HEIGHT		= 660;
 
 	// Panel sizes - variable
-	public static int PLAYER_TITLE_PANEL_WIDTH		= 0;
-	public static int PLAYER_TITLE_PANEL_HEIGHT		= 0;
-	public static int PLAY_SPACE_PANEL_WIDTH		= 0;
-	public static int PLAY_SPACE_PANEL_HEIGHT		= 0;
+	public static int PLAYER_TITLE_PANEL_WIDTH		= 487;
+	public static int PLAYER_TITLE_PANEL_HEIGHT		= 28;
+	public static int PLAY_SPACE_PANEL_WIDTH		= 487;
+	public static int PLAY_SPACE_PANEL_HEIGHT		= 619;
 	
 	// Tetrino colors
 	public static final Color NONE_COLOR				= new Color( 255, 255, 255 );

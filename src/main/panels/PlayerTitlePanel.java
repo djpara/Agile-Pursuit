@@ -19,23 +19,20 @@ public class PlayerTitlePanel extends JPanel {
 	private JPanel mParentPanel;
 
 	public PlayerTitlePanel(GameBoardManager gameBoardManager, JPanel parentPanel) {
-		this.mGameBoardManager = gameBoardManager;
-		this.mParentPanel = parentPanel;
+		mGameBoardManager = gameBoardManager;
+		mParentPanel = parentPanel;
 		
-		this.configurePanel();
-		this.displayName(getPlayerName());
+		configurePanel();
+		displayName(getPlayerName());
 	}
 	
 	/**
 	 * Configures the panel - background color, sets the size
 	 */
 	private void configurePanel() {
-		this.setBackground(GlobalVariables.DEFAULT_BACK);
+		setBackground(GlobalVariables.DEFAULT_BACK);
 		
-		GlobalVariables.PLAYER_TITLE_PANEL_WIDTH = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
-		GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT = (int)(mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION);
-		
-		this.setPreferredSize(new Dimension(GlobalVariables.PLAYER_TITLE_PANEL_WIDTH, GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT));
+		setPreferredSize(new Dimension(GlobalVariables.PLAYER_TITLE_PANEL_WIDTH, GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT));
 	}
 	
 	private String getPlayerName(){
