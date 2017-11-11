@@ -1,13 +1,13 @@
-package gameObjects;
+package main.gameObjects;
 
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import globalVariables.GlobalVariables;
-import panels.LeftPanel;
-import panels.RightPanel;
+import main.globalVariables.GlobalVariables;
+import main.panels.LeftPanel;
+import main.panels.RightPanel;
 
 public class GameBoard extends JFrame {
 	

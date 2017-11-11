@@ -1,4 +1,4 @@
-package drawingUtil;
+package main.drawingUtil;
 
 import java.awt.Font;
 import java.awt.Graphics;

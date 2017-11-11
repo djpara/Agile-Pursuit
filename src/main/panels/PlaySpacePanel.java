@@ -1,4 +1,4 @@
-package panels;
+package main.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import drawingUtil.DrawingComponent2;
-import enums.TetrinoType;
-import gameObjects.GameBoardManager;
-import gameObjects.Tetrino;
-import globalVariables.GlobalVariables;
+import main.drawingUtil.DrawingComponent2;
+import main.enums.TetrinoType;
+import main.gameObjects.GameBoardManager;
+import main.gameObjects.Tetrino;
+import main.globalVariables.GlobalVariables;
 
 public class PlaySpacePanel extends JPanel {
 

@@ -1,8 +1,8 @@
-package gameObjects;
+package main.gameObjects;
 
 import java.util.Random;
 
-import enums.TetrinoType;
+import main.enums.TetrinoType;
 
 public class Tetrino {
 

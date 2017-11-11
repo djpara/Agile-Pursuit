@@ -1,11 +1,11 @@
-package panels;
+package main.panels;
 
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import gameObjects.GameBoardManager;
-import globalVariables.GlobalVariables;
+import main.gameObjects.GameBoardManager;
+import main.globalVariables.GlobalVariables;
 
 public class RightPanel extends JPanel {
 

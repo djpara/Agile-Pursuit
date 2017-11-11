@@ -1,4 +1,4 @@
-package globalVariables;
+package main.globalVariables;
 
 import java.awt.Color;
 

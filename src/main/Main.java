@@ -1,6 +1,6 @@
 package main;
 
-import gameObjects.GameBoard;
+import main.gameObjects.GameBoard;
 
 public class Main {
 

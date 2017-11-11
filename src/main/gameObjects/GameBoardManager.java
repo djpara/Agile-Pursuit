@@ -1,13 +1,13 @@
-package gameObjects;
+package main.gameObjects;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import panels.EpicInventoryPanel;
-import panels.PlaySpacePanel;
-import panels.PlayerTitlePanel;
-import panels.ScoreAndTimerPanel;
-import panels.TriviaPanel;
+import main.panels.EpicInventoryPanel;
+import main.panels.PlaySpacePanel;
+import main.panels.PlayerTitlePanel;
+import main.panels.ScoreAndTimerPanel;
+import main.panels.TriviaPanel;
 
 public class GameBoardManager implements ActionListener {
 

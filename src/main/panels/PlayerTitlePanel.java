@@ -1,13 +1,13 @@
-package panels;
+package main.panels;
 
 import java.awt.Dimension;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import drawingUtil.DrawingComponent;
-import gameObjects.GameBoardManager;
-import globalVariables.GlobalVariables;
+import main.drawingUtil.DrawingComponent;
+import main.gameObjects.GameBoardManager;
+import main.globalVariables.GlobalVariables;
 
 public class PlayerTitlePanel extends JPanel {
 
