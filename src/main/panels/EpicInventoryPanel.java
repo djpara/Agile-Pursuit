@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import jdk.nashorn.internal.objects.Global;
 import main.gameObjects.GameBoardManager;
 import main.globalVariables.GlobalVariables;
 
@@ -28,9 +29,6 @@ public class EpicInventoryPanel extends JPanel {
 	private void configurePanel() {
 		this.setBackground(GlobalVariables.DEFAULT_BACK);
 		
-		int preferredWidth = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
-		int preferredHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.55 - GlobalVariables.CUSHION);
-		
-		this.setPreferredSize(new Dimension(preferredWidth, preferredHeight));
+		this.setPreferredSize(new Dimension(GlobalVariables.EPIC_INVENTORY_PANEL_WIDTH, GlobalVariables.EPIC_INVENTORY_PANEL_HEIGHT));
 	}
 }

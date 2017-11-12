@@ -13,6 +13,8 @@ public class GlobalVariables {
 	public static int PLAYER_TITLE_PANEL_HEIGHT		= 28;
 	public static int PLAY_SPACE_PANEL_WIDTH		= 486;
 	public static int PLAY_SPACE_PANEL_HEIGHT		= 594;
+	public static int EPIC_INVENTORY_PANEL_WIDTH	= 487;
+	public static int EPIC_INVENTORY_PANEL_HEIGHT	= 343;
 	
 	// Tetrino colors
 	public static final Color NONE_COLOR			= new Color( 255, 255, 255 );
