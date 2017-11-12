@@ -249,7 +249,7 @@ public class PlaySpacePanel extends JPanel {
 		if (minX < 0
 			|| maxX == mPlaySpaceWidth
 			|| minY == 0
-			|| maxY == mPlaySpaceHeight + 1) {
+			|| maxY == mPlaySpaceHeight) {
 			return;
 		}
 

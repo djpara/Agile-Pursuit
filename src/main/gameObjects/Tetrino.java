@@ -8,7 +8,6 @@ public class Tetrino {
 
     private TetrinoType mShape;
     private int mCoordinates[][];
-    private int[][][] mCoordinatesTable;
     
     private Random mRandom;
 
@@ -25,24 +24,34 @@ public class Tetrino {
     }
 
     public void setTetrinoType(TetrinoType tetrinoType) {
-
-        mCoordinatesTable = new int[][][] {
-                { {  0,  0 }, {  0,  0 }, {  0,  0 }, {  0,  0 } },
-                { {  0, -1 }, {  0,  0 }, { -1,  0 }, { -1,  1 } },
-                { {  0, -1 }, {  0,  0 }, {  1,  0 }, {  1,  1 } },
-                { {  0, -1 }, {  0,  0 }, {  0,  1 }, {  0,  2 } },
-                { { -1,  0 }, {  0,  0 }, {  1,  0 }, {  0,  1 } },
-                { {  0,  0 }, {  1,  0 }, {  0,  1 }, {  1,  1 } },
-                { { -1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } },
-                { {  1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } }
-        };
-
-        for (int i = 0; i < 4 ; i++) {
-            for (int j = 0; j < 2; ++j) {
-                mCoordinates[i][j] = mCoordinatesTable[tetrinoType.ordinal()][i][j];
-            }
+        switch (tetrinoType) {
+            case NONE:
+                mCoordinates = new int[][]{ {  0,  0 }, {  0,  0 }, {  0,  0 }, {  0,  0 } };
+                break;
+            case S:
+                mCoordinates = new int[][]{ {  0, -1 }, {  0,  0 }, { -1,  0 }, { -1,  1 } };
+                break;
+            case Z:
+                mCoordinates = new int[][]{ {  0, -1 }, {  0,  0 }, {  1,  0 }, {  1,  1 } };
+                break;
+            case I:
+                mCoordinates = new int[][]{ {  0, -1 }, {  0,  0 }, {  0,  1 }, {  0,  2 } };
+                break;
+            case T:
+                mCoordinates = new int[][]{ { -1,  0 }, {  0,  0 }, {  1,  0 }, {  0,  1 } };
+                break;
+            case SQUARE:
+                mCoordinates = new int[][]{ {  0,  0 }, {  1,  0 }, {  0,  1 }, {  1,  1 } };
+                break;
+            case J:
+                mCoordinates = new int[][]{ { -1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } };
+                break;
+            case L:
+                mCoordinates = new int[][]{ {  1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } };
+                break;
+            default:
+                break;
         }
-        
         mShape = tetrinoType;
     }
 
