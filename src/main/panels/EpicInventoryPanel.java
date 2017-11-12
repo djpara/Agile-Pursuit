@@ -1,16 +1,17 @@
 package main.panels;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import jdk.nashorn.internal.objects.Global;
 import main.enums.TetrinoType;
 import main.gameObjects.GameBoardManager;
 import main.gameObjects.Tetrino;
 import main.globalVariables.GlobalVariables;
 
-public class EpicInventoryPanel extends JPanel {
+public class EpicInventoryPanel extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 5L;
 
@@ -36,7 +37,9 @@ public class EpicInventoryPanel extends JPanel {
 
 		repaint();
 
-		this.fillInventory();
+		fillInventory();
+
+		addMouseListener(this);
 	}
 	
 	/**
@@ -50,9 +53,30 @@ public class EpicInventoryPanel extends JPanel {
 
 	private void fillInventory() {
 		Tetrino tetrino = new Tetrino();
+		Integer count = 0;
+
+		JComponent jComponent = new JComponent() {
+			int mX = 0;
+			int mY = 0;
+
+			public void paintComponent(Graphics g){
+				super.paintComponent(g);
+
+				Graphics2D g2d = (Graphics2D) g;
+				g2d.setFont(new Font("System",Font.PLAIN,12));
+				g2d.drawString("x"+count.toString(), mX, mY);
+				g2d.dispose();
+			}
+
+			public void setDrawCoordinates(int x, int y) {
+				mX = x;
+				mY = y;
+			}
+		};
 
 		tetrino.setTetrinoType(TetrinoType.S);
-		placeTetrino(tetrino, 5, 6);
+		placeTetrino(tetrino, 6, 6);
+
 
 		tetrino.setTetrinoType(TetrinoType.Z);
 		placeTetrino(tetrino, 10, 6);
@@ -182,6 +206,23 @@ public class EpicInventoryPanel extends JPanel {
 			default:
 				return GlobalVariables.NONE_COLOR;
 		}
+	}
+
+
+	// Mouse listener events
+	public void mousePressed(MouseEvent e) {
+	}
+
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	public void mouseExited(MouseEvent e) {
+	}
+
+	public void mouseClicked(MouseEvent e) {
 	}
 
 }

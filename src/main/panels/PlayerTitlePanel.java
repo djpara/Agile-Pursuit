@@ -23,7 +23,7 @@ public class PlayerTitlePanel extends JPanel {
 		mParentPanel = parentPanel;
 		
 		configurePanel();
-		displayName(getPlayerName());
+		displayName();
 	}
 	
 	/**
@@ -39,9 +39,22 @@ public class PlayerTitlePanel extends JPanel {
 		String input = JOptionPane.showInputDialog("Enter your name: ");
 		return input;
 	}
-	private void displayName(String s){
-		DrawingComponent DC = new DrawingComponent(s);
+
+	private void displayName() {
+		DrawingComponent DC = new DrawingComponent();
 		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),(int) (mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION)));
+
+		String playerName = getPlayerName();
+
+		if (playerName != null) {
+			DC.setText("Developer: " + playerName);
+		} else  {
+			DC.setText("Developer");
+		}
+
+		DC.setCoordinates(25, 17);
+		DC.setFontSize(20);
+
 		add(DC);
 	}
 	
