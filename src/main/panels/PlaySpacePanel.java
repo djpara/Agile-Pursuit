@@ -240,32 +240,21 @@ public class PlaySpacePanel extends JPanel {
 	 */
 	private void moveTetrino(Tetrino tetrino, int selectedTetrinoXCoordinate, int selectedTetrinoYCoordinate) {
 
-		for (int i = 0; i < 4; ++i) {
-			if (selectedTetrinoXCoordinate < 0
-					|| selectedTetrinoXCoordinate > mPlaySpaceWidth + 1
-					|| selectedTetrinoYCoordinate < 0
-					|| selectedTetrinoYCoordinate > mPlaySpaceHeight) {
-				return;
-			}
+		int minX = Math.min(selectedTetrinoXCoordinate, selectedTetrinoXCoordinate + tetrino.minX());
+		int minY = Math.min(selectedTetrinoYCoordinate, selectedTetrinoYCoordinate + tetrino.minY());
+
+		int maxX = Math.max(selectedTetrinoXCoordinate, selectedTetrinoXCoordinate + tetrino.maxX());
+		int maxY = Math.max(selectedTetrinoYCoordinate, selectedTetrinoYCoordinate + tetrino.maxY());
+
+		if (minX < 0
+			|| maxX == mPlaySpaceWidth
+			|| minY == 0
+			|| maxY == mPlaySpaceHeight + 1) {
+			return;
 		}
 
-		for (int i = 0; i < 4; ++i) {
-
-			mSelectedTetrinoXCoordinate = selectedTetrinoXCoordinate;
-			mSelectedTetrinoYCoordinate = selectedTetrinoYCoordinate;
-			
-			if (selectedTetrinoXCoordinate < 0
-				|| selectedTetrinoXCoordinate >= mPlaySpaceWidth + 1
-				|| selectedTetrinoYCoordinate < 0
-				|| selectedTetrinoYCoordinate >= mPlaySpaceHeight + 1) {
-				return;
-			}
-			
-			if (tetrinoTypeAt(selectedTetrinoXCoordinate, selectedTetrinoYCoordinate) != TetrinoType.NONE) {
-				return;
-			}
-			
-		}
+		mSelectedTetrinoXCoordinate = selectedTetrinoXCoordinate;
+		mSelectedTetrinoYCoordinate = selectedTetrinoYCoordinate;
 		
 		mSelectedTetrino = tetrino;
 		repaint();
@@ -279,7 +268,7 @@ public class PlaySpacePanel extends JPanel {
 		
 		for (int i = 0; i < 4; ++i) {
             int x = mSelectedTetrinoXCoordinate + mSelectedTetrino.getX(i);
-            int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i);
+            int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i) - 1;
             mPlaySpace[(y * mPlaySpaceWidth) + x] = mSelectedTetrino.getShape();
         }
 		

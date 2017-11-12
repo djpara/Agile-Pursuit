@@ -58,9 +58,7 @@ public class Tetrino {
     		return mCoordinates[i][0];
     }
     
-    public int getY(int i) {
-    		return mCoordinates[i][1];
-    }
+    public int getY(int i) { return mCoordinates[i][1]; }
     
     public TetrinoType getShape()  {
     		return mShape;
@@ -93,6 +91,26 @@ public class Tetrino {
         return m;
     }
 
+    public int maxX() {
+        int m = mCoordinates[0][0];
+
+        for (int i=0; i < 4; i++) {
+            m = Math.max(m, mCoordinates[i][0]);
+        }
+
+        return m;
+    }
+
+    public int maxY() {
+        int m = mCoordinates[0][1];
+
+        for (int i=0; i < 4; i++) {
+            m = Math.max(m, mCoordinates[i][1]);
+        }
+
+        return m;
+    }
+
     public Tetrino rotateLeft() {
         if (mShape == TetrinoType.S) {
             return this;
@@ -110,7 +128,7 @@ public class Tetrino {
     }
 
     public Tetrino rotateRight() {
-        if (mShape == TetrinoType.S)
+        if (mShape == TetrinoType.SQUARE)
             return this;
 
         Tetrino result = new Tetrino();
