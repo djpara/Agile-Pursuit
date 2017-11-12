@@ -143,17 +143,17 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 
 		g.setColor(Color.BLACK);
 		// S count
-		g.drawString("x"+mSCount, 190, 310);
+		g.drawString("x"+mZCount, 190, 310);
 		// Z count
-		g.drawString("x"+mZCount, 100, 310);
+		g.drawString("x"+mSCount, 100, 310);
 		// I count
 		g.drawString("x"+mICount, 270, 310);
 		// T count
 		g.drawString("x"+mTCount, 360, 310);
 		// L count
-		g.drawString("x"+mLCount, 225, 150);
+		g.drawString("x"+mJCount, 225, 150);
 		// J count
-		g.drawString("x"+mJCount, 135, 150);
+		g.drawString("x"+mLCount, 135, 150);
 		// Square count
 		g.drawString("x"+mSquareCount, 315, 150);
 	}
