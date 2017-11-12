@@ -23,9 +23,9 @@ public class DrawingComponent2 extends JComponent{
 				GlobalVariables.PLAY_SPACE_PANEL_WIDTH/2,
 				GlobalVariables.PLAY_SPACE_PANEL_HEIGHT/2 + 10 - GlobalVariables.CUSHION);
 		g2d.drawLine(GlobalVariables.PLAY_SPACE_PANEL_WIDTH/2 - 10,
-				GlobalVariables.PLAY_SPACE_PANEL_HEIGHT/2 - GlobalVariables.CUSHION,
+				GlobalVariables.PLAY_SPACE_PANEL_HEIGHT/2 - GlobalVariables.CUSHION - 1,
 				GlobalVariables.PLAY_SPACE_PANEL_WIDTH/2 + 10,
-				GlobalVariables.PLAY_SPACE_PANEL_HEIGHT/2 - GlobalVariables.CUSHION);
+				GlobalVariables.PLAY_SPACE_PANEL_HEIGHT/2 - GlobalVariables.CUSHION - 1);
 		g2d.dispose();
 	}
 

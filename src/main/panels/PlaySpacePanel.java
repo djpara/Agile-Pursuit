@@ -254,7 +254,7 @@ public class PlaySpacePanel extends JPanel {
 			mSelectedTetrinoXCoordinate = selectedTetrinoXCoordinate;
 			mSelectedTetrinoYCoordinate = selectedTetrinoYCoordinate;
 			
-			if (selectedTetrinoXCoordinate < 0 
+			if (selectedTetrinoXCoordinate < 0
 				|| selectedTetrinoXCoordinate >= mPlaySpaceWidth + 1
 				|| selectedTetrinoYCoordinate < 0
 				|| selectedTetrinoYCoordinate >= mPlaySpaceHeight + 1) {
@@ -279,7 +279,7 @@ public class PlaySpacePanel extends JPanel {
 		
 		for (int i = 0; i < 4; ++i) {
             int x = mSelectedTetrinoXCoordinate + mSelectedTetrino.getX(i);
-            int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i) + 1;
+            int y = mSelectedTetrinoYCoordinate - mSelectedTetrino.getY(i);
             mPlaySpace[(y * mPlaySpaceWidth) + x] = mSelectedTetrino.getShape();
         }
 		
