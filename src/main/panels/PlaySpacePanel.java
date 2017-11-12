@@ -220,8 +220,12 @@ public class PlaySpacePanel extends JPanel {
      */
     private void getNextTetrinoFromInventory() {
 
-    	// TESTING - 
-    	mSelectedTetrino = mInventorySimulationArray.remove(0);
+    	// TESTING -
+		if (!mInventorySimulationArray.isEmpty()) {
+			mSelectedTetrino = mInventorySimulationArray.remove(0);
+		} else {
+			mSelectedTetrino = new Tetrino();
+		}
 
     	mGameBoardManager.decrementTetrinoCount(mSelectedTetrino.getShape());
 
