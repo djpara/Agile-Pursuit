@@ -18,6 +18,8 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 	// Set play space height and width allows for calculating block sizes. 27x19 playspace creates a block of 18x18
 	private final int mEpicInventoryWidth = 27;
 	private final int mEpicInventoryHeight = 19;
+	private final Dimension mPreferredSize = new Dimension(GlobalVariables.EPIC_INVENTORY_PANEL_WIDTH,
+			GlobalVariables.EPIC_INVENTORY_PANEL_HEIGHT);
 
 	private TetrinoType[] mEpicInventory;
 	
@@ -25,11 +27,21 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 	
 	private JPanel mParentPanel;
 
+	private int mSCount 	 = 0;
+	private int mZCount 	 = 0;
+	private int mICount 	 = 0;
+	private int mTCount 	 = 0;
+	private int mLCount 	 = 0;
+	private int mJCount 	 = 0;
+	private int mSquareCount = 0;
+
 	public EpicInventoryPanel(GameBoardManager gameBoardManager, JPanel parentPanel) {
-		this.mGameBoardManager = gameBoardManager;
-		this.mParentPanel = parentPanel;
+		mGameBoardManager = gameBoardManager;
+		gameBoardManager.setEpicInventoryPanel(this);
+
+		mParentPanel = parentPanel;
 		
-		this.configurePanel();
+		configurePanel();
 
 		mEpicInventory = new TetrinoType[ mEpicInventoryWidth * mEpicInventoryHeight ];
 
@@ -37,7 +49,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 
 		repaint();
 
-		fillInventory();
+		fillInventoryWithShapes();
 
 		addMouseListener(this);
 	}
@@ -48,35 +60,15 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 	private void configurePanel() {
 		this.setBackground(GlobalVariables.DEFAULT_BACK);
 
-		this.setPreferredSize(new Dimension(GlobalVariables.EPIC_INVENTORY_PANEL_WIDTH, GlobalVariables.EPIC_INVENTORY_PANEL_HEIGHT));
+		this.setPreferredSize(mPreferredSize);
 	}
 
-	private void fillInventory() {
+	private void fillInventoryWithShapes() {
 		Tetrino tetrino = new Tetrino();
-		Integer count = 0;
-
-		JComponent jComponent = new JComponent() {
-			int mX = 0;
-			int mY = 0;
-
-			public void paintComponent(Graphics g){
-				super.paintComponent(g);
-
-				Graphics2D g2d = (Graphics2D) g;
-				g2d.setFont(new Font("System",Font.PLAIN,12));
-				g2d.drawString("x"+count.toString(), mX, mY);
-				g2d.dispose();
-			}
-
-			public void setDrawCoordinates(int x, int y) {
-				mX = x;
-				mY = y;
-			}
-		};
+		Integer count = 0;;
 
 		tetrino.setTetrinoType(TetrinoType.S);
 		placeTetrino(tetrino, 6, 6);
-
 
 		tetrino.setTetrinoType(TetrinoType.Z);
 		placeTetrino(tetrino, 10, 6);
@@ -148,6 +140,22 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				}
 			}
 		}
+
+		g.setColor(Color.BLACK);
+		// S count
+		g.drawString("x"+mSCount, 190, 310);
+		// Z count
+		g.drawString("x"+mZCount, 100, 310);
+		// I count
+		g.drawString("x"+mICount, 270, 310);
+		// T count
+		g.drawString("x"+mTCount, 360, 310);
+		// L count
+		g.drawString("x"+mLCount, 225, 150);
+		// J count
+		g.drawString("x"+mJCount, 135, 150);
+		// Square count
+		g.drawString("x"+mSquareCount, 315, 150);
 	}
 
 	/**
@@ -208,6 +216,61 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 		}
 	}
 
+	public void incrementTetrinoCount(TetrinoType type) {
+		switch (type) {
+			case S:
+				mSCount += 1;
+				break;
+			case Z:
+				mZCount += 1;
+				break;
+			case I:
+				mICount += 1;
+				break;
+			case T:
+				mTCount += 1;
+				break;
+			case L:
+				mLCount += 1;
+				break;
+			case J:
+				mJCount += 1;
+				break;
+			case SQUARE:
+				mSquareCount += 1;
+				break;
+		}
+
+		repaint();
+	}
+
+	public void decrementTetrinoCount(TetrinoType type) {
+		switch (type) {
+			case S:
+				mSCount -= 1;
+				break;
+			case Z:
+				mZCount -= 1;
+				break;
+			case I:
+				mICount -= 1;
+				break;
+			case T:
+				mTCount -= 1;
+				break;
+			case L:
+				mLCount -= 1;
+				break;
+			case J:
+				mJCount -= 1;
+				break;
+			case SQUARE:
+				mSquareCount -= 1;
+				break;
+		}
+
+		repaint();
+	}
 
 	// Mouse listener events
 	public void mousePressed(MouseEvent e) {

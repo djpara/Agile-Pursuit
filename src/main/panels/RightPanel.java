@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import main.enums.TetrinoType;
 import main.gameObjects.GameBoardManager;
 import main.globalVariables.GlobalVariables;
 

@@ -19,7 +19,11 @@ public class DrawingComponent extends JComponent{
 	int mTextYCoordinate = 0;
 	int mFontSize = 12;
 	
-	public DrawingComponent(){ }
+	public DrawingComponent(String text, int xCoordinate, int yCoordinate, int fontSize){
+		setText(text);
+		setCoordinates(xCoordinate, yCoordinate);
+		setFontSize(fontSize);
+	}
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);

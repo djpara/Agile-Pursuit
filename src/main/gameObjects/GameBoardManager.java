@@ -1,15 +1,13 @@
 package main.gameObjects;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import main.enums.TetrinoType;
 import main.panels.EpicInventoryPanel;
 import main.panels.PlaySpacePanel;
 import main.panels.PlayerTitlePanel;
 import main.panels.ScoreAndTimerPanel;
 import main.panels.TriviaPanel;
 
-public class GameBoardManager implements ActionListener {
+public class GameBoardManager {
 
 	// Singleton Game Board manager instance
 	private static GameBoardManager mGameBoardManagerInstance;
@@ -78,11 +76,12 @@ public class GameBoardManager implements ActionListener {
 	public void setPlaySpacePanel(PlaySpacePanel playSpacePanel) {
 		mPlaySpacePanel = playSpacePanel;
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO
-		
+
+	public void incrementTetrinoCount(TetrinoType type) {
+		mEpicInventoryPanel.incrementTetrinoCount(type);
 	}
-	
+
+	public void decrementTetrinoCount(TetrinoType type) {
+		mEpicInventoryPanel.decrementTetrinoCount(type);
+	}
 }

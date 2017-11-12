@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import jdk.nashorn.internal.objects.Global;
 import main.drawingUtil.DrawingComponent2;
 import main.enums.TetrinoType;
 import main.gameObjects.GameBoardManager;
@@ -23,6 +22,8 @@ public class PlaySpacePanel extends JPanel {
 	// Set play space height and width allows for calculating block sizes. 18x22 playspace creates a block of 27x27
 	private final int mPlaySpaceWidth = 18;
     private final int mPlaySpaceHeight = 22;
+    private final Dimension mPreferredSize = new Dimension(GlobalVariables.PLAY_SPACE_PANEL_WIDTH,
+			GlobalVariables.PLAY_SPACE_PANEL_HEIGHT);
 	
 	private GameBoardManager mGameBoardManager;
 	
@@ -45,6 +46,8 @@ public class PlaySpacePanel extends JPanel {
 		mIsListening = true;
 		
 		mGameBoardManager = gameBoardManager;
+		gameBoardManager.setPlaySpacePanel(this);
+
 		mParentPanel = parentPanel;
 		
 		mPlayedTetrinos = new ArrayList<Tetrino>();
@@ -58,6 +61,7 @@ public class PlaySpacePanel extends JPanel {
 		for (int i = 0; i < 55; ++i) {
 			newTetrino = new Tetrino();
 			newTetrino.setRandomTetrino();
+			gameBoardManager.incrementTetrinoCount(newTetrino.getShape());
 			mInventorySimulationArray.add(newTetrino);
 		}
 
@@ -78,12 +82,12 @@ public class PlaySpacePanel extends JPanel {
 	private void configurePanel() {
 		setBackground(GlobalVariables.DEFAULT_BACK);
 
-		setPreferredSize(new Dimension(GlobalVariables.PLAY_SPACE_PANEL_WIDTH, GlobalVariables.PLAY_SPACE_PANEL_HEIGHT));
+		setPreferredSize(mPreferredSize);
 	}
 	
 	private void drawCross(){
 		DrawingComponent2 DC = new DrawingComponent2();
-		DC.setPreferredSize(new Dimension(GlobalVariables.PLAY_SPACE_PANEL_WIDTH, GlobalVariables.PLAY_SPACE_PANEL_HEIGHT));
+		DC.setPreferredSize(mPreferredSize);
 		add(DC);
 	}
 	
@@ -218,7 +222,9 @@ public class PlaySpacePanel extends JPanel {
 
     	// TESTING - 
     	mSelectedTetrino = mInventorySimulationArray.remove(0);
-    	
+
+    	mGameBoardManager.decrementTetrinoCount(mSelectedTetrino.getShape());
+
     	mSelectedTetrinoXCoordinate = mPlaySpaceWidth / 2 + 1;
     	mSelectedTetrinoYCoordinate = mPlaySpaceHeight / 2 + 1;
     		

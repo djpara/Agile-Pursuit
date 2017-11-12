@@ -13,6 +13,9 @@ import main.globalVariables.GlobalVariables;
 public class PlayerTitlePanel extends JPanel {
 
 	private static final long serialVersionUID = 3L;
+
+	private final Dimension mPreferredSize = new Dimension(GlobalVariables.PLAYER_TITLE_PANEL_WIDTH,
+			GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT);
 	
 	private GameBoardManager mGameBoardManager;
 	
@@ -32,7 +35,7 @@ public class PlayerTitlePanel extends JPanel {
 	private void configurePanel() {
 		setBackground(GlobalVariables.DEFAULT_BACK);
 		
-		setPreferredSize(new Dimension(GlobalVariables.PLAYER_TITLE_PANEL_WIDTH, GlobalVariables.PLAYER_TITLE_PANEL_HEIGHT));
+		setPreferredSize(mPreferredSize);
 	}
 	
 	private String getPlayerName(){
@@ -41,20 +44,18 @@ public class PlayerTitlePanel extends JPanel {
 	}
 
 	private void displayName() {
-		DrawingComponent DC = new DrawingComponent();
-		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),(int) (mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION)));
-
 		String playerName = getPlayerName();
+		String text;
 
-		if (playerName != null) {
-			DC.setText("Developer: " + playerName);
+		if (playerName != null
+				&& playerName != "") {
+			text = "Developer: " + playerName;
 		} else  {
-			DC.setText("Developer");
+			text = "Developer";
 		}
 
-		DC.setCoordinates(25, 17);
-		DC.setFontSize(20);
-
+		DrawingComponent DC = new DrawingComponent(text, 25, 17, 20);
+		DC.setPreferredSize(mPreferredSize);
 		add(DC);
 	}
 	
