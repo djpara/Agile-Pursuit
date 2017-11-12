@@ -22,7 +22,7 @@ public class PlaySpacePanel extends JPanel {
 	
 	// Set play space height and width allows for calculating block sizes. 24x31 playspace creates a block of 30x30
 	private final int mPlaySpaceWidth = 18;
-    private final int mPlaySpaceHeight = 22; //31;
+    private final int mPlaySpaceHeight = 22;
 	
 	private GameBoardManager mGameBoardManager;
 	
@@ -55,7 +55,7 @@ public class PlaySpacePanel extends JPanel {
 		
 		// TESTING = Fill the array
 		Tetrino newTetrino;
-		for (int i = 0; i < 15; ++i) {
+		for (int i = 0; i < 55; ++i) {
 			newTetrino = new Tetrino();
 			newTetrino.setRandomTetrino();
 			mInventorySimulationArray.add(newTetrino);

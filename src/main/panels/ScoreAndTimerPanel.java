@@ -28,10 +28,10 @@ public class ScoreAndTimerPanel extends JPanel {
 	private void configurePanel() {
 		this.setBackground(GlobalVariables.DEFAULT_BACK);
 		
-		int preferredWidth = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
-		int preferredHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION);
+//		int preferredWidth = mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION;
+//		int preferredHeight = (int)(mParentPanel.getPreferredSize().getHeight() * 0.05 - GlobalVariables.CUSHION);
 		
-		this.setPreferredSize(new Dimension(preferredWidth, preferredHeight));
+		this.setPreferredSize(new Dimension(GlobalVariables.SCORE_AND_TIMER_PANEL_WIDTH, GlobalVariables.SCORE_AND_TIMER_PANEL_HEIGHT));
 	}
 	
 }
