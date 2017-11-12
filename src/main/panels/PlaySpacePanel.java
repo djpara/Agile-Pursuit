@@ -20,7 +20,7 @@ public class PlaySpacePanel extends JPanel {
 
 	private static final long serialVersionUID = 2L;
 	
-	// Set play space height and width allows for calculating block sizes. 24x31 playspace creates a block of 30x30
+	// Set play space height and width allows for calculating block sizes. 18x22 playspace creates a block of 27x27
 	private final int mPlaySpaceWidth = 18;
     private final int mPlaySpaceHeight = 22;
 	
