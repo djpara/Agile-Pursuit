@@ -15,7 +15,7 @@ public class GlobalVariables {
 	public static int PLAY_SPACE_PANEL_HEIGHT		= 594;
 	
 	// Tetrino colors
-	public static final Color NONE_COLOR				= new Color( 255, 255, 255 );
+	public static final Color NONE_COLOR			= new Color( 255, 255, 255 );
 	public static final Color Z_COLOR				= new Color(  65, 251,  48 );
 	public static final Color S_COLOR				= new Color(  60, 254, 254 );
 	public static final Color I_COLOR				= new Color( 251, 128,  35 );

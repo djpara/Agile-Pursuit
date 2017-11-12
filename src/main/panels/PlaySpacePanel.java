@@ -83,8 +83,7 @@ public class PlaySpacePanel extends JPanel {
 	
 	private void drawCross(){
 		DrawingComponent2 DC = new DrawingComponent2();
-		DC.setPreferredSize(new Dimension((int)(mParentPanel.getPreferredSize().width - GlobalVariables.CUSHION),
-				(int)(mParentPanel.getPreferredSize().getHeight() * 0.95 - GlobalVariables.CUSHION)));
+		DC.setPreferredSize(new Dimension(GlobalVariables.PLAY_SPACE_PANEL_WIDTH, GlobalVariables.PLAY_SPACE_PANEL_HEIGHT));
 		add(DC);
 	}
 	
