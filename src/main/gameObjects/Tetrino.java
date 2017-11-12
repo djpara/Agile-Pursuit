@@ -112,7 +112,7 @@ public class Tetrino {
     }
 
     public Tetrino rotateLeft() {
-        if (mShape == TetrinoType.S) {
+        if (mShape == TetrinoType.SQUARE) {
             return this;
         }
 
