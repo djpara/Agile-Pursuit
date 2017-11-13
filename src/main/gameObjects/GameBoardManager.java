@@ -84,4 +84,8 @@ public class GameBoardManager {
 	public void decrementTetrinoCount(TetrinoType type) {
 		mEpicInventoryPanel.decrementTetrinoCount(type);
 	}
+
+	public void setSelectedTetrino(TetrinoType type) {
+		mPlaySpacePanel.setSelectedTetrino(type);
+	}
 }

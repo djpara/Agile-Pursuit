@@ -120,9 +120,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 	 * @param y
 	 * @return
 	 */
-	TetrinoType tetrinoTypeAt(int x, int y) {
-		return mEpicInventory[(y * mEpicInventoryWidth) +  x];
-	}
+	TetrinoType tetrinoTypeAt(int x, int y) { return mEpicInventory[(y * mEpicInventoryWidth) +  x]; }
 
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -274,6 +272,63 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 
 	// Mouse listener events
 	public void mousePressed(MouseEvent e) {
+		// TODO:
+		// L Pressed
+		if (e.getX() >= 126
+				&& e.getX() <= 161
+				&& e.getY() <= 127
+				&& e.getY() >= 74) {
+			setSelectedTetrino(TetrinoType.L, mLCount);
+			return;
+		}
+		// J Pressed
+		if (e.getX() >= 215
+				&& e.getX() <= 252
+				&& e.getY() <= 129
+				&& e.getY() >= 74) {
+			setSelectedTetrino(TetrinoType.J, mJCount);
+		}
+		// Square Pressed
+		if (e.getX() >= 306
+				&& e.getX() <= 341
+				&& e.getY() <= 127
+				&& e.getY() >= 91) {
+			setSelectedTetrino(TetrinoType.SQUARE, mSquareCount);
+		}
+		// S Pressed
+		if (e.getX() >= 89
+				&& e.getX() <= 126
+				&& e.getY() <= 272
+				&& e.getY() >= 218) {
+			setSelectedTetrino(TetrinoType.S, mSCount);
+		}
+		// Z Pressed
+		if (e.getX() >= 180
+				&& e.getX() <= 217
+				&& e.getY() <= 272
+				&& e.getY() >= 218) {
+			setSelectedTetrino(TetrinoType.Z, mZCount);
+		}
+		// I Pressed
+		if (e.getX() >= 270
+				&& e.getX() <= 288
+				&& e.getY() <= 289
+				&& e.getY() >= 218) {
+			setSelectedTetrino(TetrinoType.I, mICount);
+		}
+		// T Pressed
+		if (e.getX() >= 343
+				&& e.getX() <= 396
+				&& e.getY() <= 273
+				&& e.getY() >= 236) {
+			setSelectedTetrino(TetrinoType.T, mTCount);
+		}
+	}
+
+	private void setSelectedTetrino(TetrinoType type, int currentCount) {
+		if (currentCount > 0) {
+			mGameBoardManager.setSelectedTetrino(type);
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
