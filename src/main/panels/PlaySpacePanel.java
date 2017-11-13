@@ -235,6 +235,10 @@ public class PlaySpacePanel extends JPanel {
     }
 
     public void setSelectedTetrino(TetrinoType type) {
+    	if (mSelectedTetrino.getShape() != TetrinoType.NONE) {
+    		mGameBoardManager.incrementTetrinoCount(mSelectedTetrino.getShape());
+		}
+
     	mSelectedTetrino = new Tetrino();
     	mSelectedTetrino.setTetrinoType(type);
     	repaint();
