@@ -1,15 +1,13 @@
-package gameObjects;
+package main.gameObjects;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import main.enums.TetrinoType;
+import main.panels.EpicInventoryPanel;
+import main.panels.PlaySpacePanel;
+import main.panels.PlayerTitlePanel;
+import main.panels.ScoreAndTimerPanel;
+import main.panels.TriviaPanel;
 
-import panels.EpicInventoryPanel;
-import panels.PlaySpacePanel;
-import panels.PlayerTitlePanel;
-import panels.ScoreAndTimerPanel;
-import panels.TriviaPanel;
-
-public class GameBoardManager implements ActionListener {
+public class GameBoardManager {
 
 	// Singleton Game Board manager instance
 	private static GameBoardManager mGameBoardManagerInstance;
@@ -78,11 +76,16 @@ public class GameBoardManager implements ActionListener {
 	public void setPlaySpacePanel(PlaySpacePanel playSpacePanel) {
 		mPlaySpacePanel = playSpacePanel;
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO
-		
+
+	public void addToInventory(Tetrino tetrino) {
+		mEpicInventoryPanel.addToInventory(tetrino);
 	}
-	
+
+	public Tetrino getRandomTetrino() {
+		return mEpicInventoryPanel.getRandomTetrino();
+	}
+
+	public void setSelectedTetrino(TetrinoType type) {
+		mPlaySpacePanel.setSelectedTetrino(type);
+	}
 }

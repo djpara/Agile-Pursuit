@@ -1,14 +1,13 @@
-package gameObjects;
+package main.gameObjects;
 
 import java.util.Random;
 
-import enums.TetrinoType;
+import main.enums.TetrinoType;
 
 public class Tetrino {
 
     private TetrinoType mShape;
     private int mCoordinates[][];
-    private int[][][] mCoordinatesTable;
     
     private Random mRandom;
 
@@ -25,24 +24,34 @@ public class Tetrino {
     }
 
     public void setTetrinoType(TetrinoType tetrinoType) {
-
-        mCoordinatesTable = new int[][][] {
-                { {  0,  0 }, {  0,  0 }, {  0,  0 }, {  0,  0 } },
-                { {  0, -1 }, {  0,  0 }, { -1,  0 }, { -1,  1 } },
-                { {  0, -1 }, {  0,  0 }, {  1,  0 }, {  1,  1 } },
-                { {  0, -1 }, {  0,  0 }, {  0,  1 }, {  0,  2 } },
-                { { -1,  0 }, {  0,  0 }, {  1,  0 }, {  0,  1 } },
-                { {  0,  0 }, {  1,  0 }, {  0,  1 }, {  1,  1 } },
-                { { -1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } },
-                { {  1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } }
-        };
-
-        for (int i = 0; i < 4 ; i++) {
-            for (int j = 0; j < 2; ++j) {
-                mCoordinates[i][j] = mCoordinatesTable[tetrinoType.ordinal()][i][j];
-            }
+        switch (tetrinoType) {
+            case NONE:
+                mCoordinates = new int[][]{ {  0,  0 }, {  0,  0 }, {  0,  0 }, {  0,  0 } };
+                break;
+            case S:
+                mCoordinates = new int[][]{ {  0, -1 }, {  0,  0 }, { -1,  0 }, { -1,  1 } };
+                break;
+            case Z:
+                mCoordinates = new int[][]{ {  0, -1 }, {  0,  0 }, {  1,  0 }, {  1,  1 } };
+                break;
+            case I:
+                mCoordinates = new int[][]{ {  0, -1 }, {  0,  0 }, {  0,  1 }, {  0,  2 } };
+                break;
+            case T:
+                mCoordinates = new int[][]{ { -1,  0 }, {  0,  0 }, {  1,  0 }, {  0,  1 } };
+                break;
+            case SQUARE:
+                mCoordinates = new int[][]{ {  0,  0 }, {  1,  0 }, {  0,  1 }, {  1,  1 } };
+                break;
+            case J:
+                mCoordinates = new int[][]{ { -1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } };
+                break;
+            case L:
+                mCoordinates = new int[][]{ {  1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 } };
+                break;
+            default:
+                break;
         }
-        
         mShape = tetrinoType;
     }
 
@@ -58,9 +67,7 @@ public class Tetrino {
     		return mCoordinates[i][0];
     }
     
-    public int getY(int i) {
-    		return mCoordinates[i][1];
-    }
+    public int getY(int i) { return mCoordinates[i][1]; }
     
     public TetrinoType getShape()  {
     		return mShape;
@@ -93,8 +100,28 @@ public class Tetrino {
         return m;
     }
 
+    public int maxX() {
+        int m = mCoordinates[0][0];
+
+        for (int i=0; i < 4; i++) {
+            m = Math.max(m, mCoordinates[i][0]);
+        }
+
+        return m;
+    }
+
+    public int maxY() {
+        int m = mCoordinates[0][1];
+
+        for (int i=0; i < 4; i++) {
+            m = Math.max(m, mCoordinates[i][1]);
+        }
+
+        return m;
+    }
+
     public Tetrino rotateLeft() {
-        if (mShape == TetrinoType.S) {
+        if (mShape == TetrinoType.SQUARE) {
             return this;
         }
 
@@ -110,7 +137,7 @@ public class Tetrino {
     }
 
     public Tetrino rotateRight() {
-        if (mShape == TetrinoType.S)
+        if (mShape == TetrinoType.SQUARE)
             return this;
 
         Tetrino result = new Tetrino();
