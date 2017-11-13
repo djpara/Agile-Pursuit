@@ -29,9 +29,6 @@ public class PlaySpacePanel extends JPanel {
 	
 	private JPanel mParentPanel;
 	
-	// TESTING = simulated inventory tetrinos (dummy code)
-	private ArrayList<Tetrino> mInventorySimulationArray;
-	
 	private ArrayList<Tetrino> mPlayedTetrinos;
 	private Tetrino mSelectedTetrino;
 	private TetrinoType[] mPlaySpace;
@@ -51,18 +48,15 @@ public class PlaySpacePanel extends JPanel {
 		mParentPanel = parentPanel;
 		
 		mPlayedTetrinos = new ArrayList<Tetrino>();
-		mInventorySimulationArray = new ArrayList<Tetrino>();
 		
 		configurePanel();
 		drawCross();
-		
-		// TESTING = Fill the array
+
 		Tetrino newTetrino;
-		for (int i = 0; i < 55; ++i) {
+		for (int i = 0; i < 25; ++i) {
 			newTetrino = new Tetrino();
 			newTetrino.setRandomTetrino();
-			gameBoardManager.incrementTetrinoCount(newTetrino.getShape());
-			mInventorySimulationArray.add(newTetrino);
+			gameBoardManager.addToInventory(newTetrino);
 		}
 
 		getRandomTetrinoFromInventory();
@@ -135,6 +129,7 @@ public class PlaySpacePanel extends JPanel {
 		}
 
 		// Draws the current tetrino piece that's being moved around
+		if (mSelectedTetrino == null) { return; };
 		TetrinoType tetrinoType = mSelectedTetrino.getShape(); 
 		if (tetrinoType != TetrinoType.NONE) {
             for (int i = 0; i < 4; ++i) {
@@ -199,18 +194,18 @@ public class PlaySpacePanel extends JPanel {
         for (int i = 0; i < mPlaySpaceWidth * mPlaySpaceHeight; ++i) {
             mPlaySpace[i] = TetrinoType.NONE;
         }
-        
+
         returnSelectedTetrino();
     }
-    
+
     /**
-     * Moves the Tetrinos to the inventory from the play space 
+     * Moves the Tetrinos to the inventory from the play space
      */
     private void returnSelectedTetrino() {
     		// TODO
-    	
-    		// TESTING - Simulates returning mSelectedTetrino to the inventory and grabbing next tetrino in line 
-    		mInventorySimulationArray.add(mSelectedTetrino);
+
+    		// TESTING - Simulates returning mSelectedTetrino to the inventory and grabbing next tetrino in line
+    		mGameBoardManager.addToInventory(mSelectedTetrino);
     		getRandomTetrinoFromInventory();
     		repaint();
     }
@@ -220,23 +215,16 @@ public class PlaySpacePanel extends JPanel {
      */
     private void getRandomTetrinoFromInventory() {
 
-    	// TESTING -
-		if (!mInventorySimulationArray.isEmpty()) {
-			mSelectedTetrino = mInventorySimulationArray.remove(0);
-		} else {
-			mSelectedTetrino = new Tetrino();
-		}
-
-    	mGameBoardManager.decrementTetrinoCount(mSelectedTetrino.getShape());
+		mSelectedTetrino = mGameBoardManager.getRandomTetrino();
 
     	mSelectedTetrinoXCoordinate = mPlaySpaceWidth / 2 + 1;
     	mSelectedTetrinoYCoordinate = mPlaySpaceHeight / 2 + 1;
-    		
     }
 
     public void setSelectedTetrino(TetrinoType type) {
-    	if (mSelectedTetrino.getShape() != TetrinoType.NONE) {
-    		mGameBoardManager.incrementTetrinoCount(mSelectedTetrino.getShape());
+    	if (mSelectedTetrino.getShape() != TetrinoType.NONE
+				&& mSelectedTetrino != null) {
+    		mGameBoardManager.addToInventory(mSelectedTetrino);
 		}
 
     	mSelectedTetrino = new Tetrino();
@@ -305,7 +293,9 @@ public class PlaySpacePanel extends JPanel {
 	    	 */
 	    	public void keyPressed(KeyEvent keyEvent) {
 	
-	    		if (!mIsListening || mSelectedTetrino.getShape() == TetrinoType.NONE) {
+	    		if (!mIsListening
+						|| mSelectedTetrino == null
+						|| mSelectedTetrino.getShape() == TetrinoType.NONE) {
 	    			return;
 	    		}
 	

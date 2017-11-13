@@ -77,12 +77,12 @@ public class GameBoardManager {
 		mPlaySpacePanel = playSpacePanel;
 	}
 
-	public void incrementTetrinoCount(TetrinoType type) {
-		mEpicInventoryPanel.incrementTetrinoCount(type);
+	public void addToInventory(Tetrino tetrino) {
+		mEpicInventoryPanel.addToInventory(tetrino);
 	}
 
-	public void decrementTetrinoCount(TetrinoType type) {
-		mEpicInventoryPanel.decrementTetrinoCount(type);
+	public Tetrino getRandomTetrino() {
+		return mEpicInventoryPanel.getRandomTetrino();
 	}
 
 	public void setSelectedTetrino(TetrinoType type) {

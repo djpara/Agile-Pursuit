@@ -3,6 +3,8 @@ package main.panels;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -27,6 +29,8 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 	
 	private JPanel mParentPanel;
 
+	private ArrayList<Tetrino> mInventoryArray;
+
 	private int mSCount 	 = 0;
 	private int mZCount 	 = 0;
 	private int mICount 	 = 0;
@@ -44,6 +48,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 		configurePanel();
 
 		mEpicInventory = new TetrinoType[ mEpicInventoryWidth * mEpicInventoryHeight ];
+		mInventoryArray = new ArrayList<Tetrino>();
 
 		clearPlaySpace();
 
@@ -214,7 +219,27 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 		}
 	}
 
-	public void incrementTetrinoCount(TetrinoType type) {
+	private int getTetrinoCount(TetrinoType type) {
+		switch (type) {
+			case S:
+				return mSCount;
+			case Z:
+				return mZCount;
+			case I:
+				return mICount;
+			case T:
+				return mTCount;
+			case L:
+				return mLCount;
+			case J:
+				return  mJCount;
+			case SQUARE:
+				return mSquareCount;
+		}
+		return 0;
+	}
+
+	private void incrementTetrinoCount(TetrinoType type) {
 		switch (type) {
 			case S:
 				mSCount += 1;
@@ -242,7 +267,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 		repaint();
 	}
 
-	public void decrementTetrinoCount(TetrinoType type) {
+	private void decrementTetrinoCount(TetrinoType type) {
 		switch (type) {
 			case S:
 				mSCount -= 1;
@@ -345,6 +370,22 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 			mGameBoardManager.setSelectedTetrino(type);
 			decrementTetrinoCount(type);
 		}
+	}
+
+	public void addToInventory(Tetrino tetrino) {
+		mInventoryArray.add(tetrino);
+		incrementTetrinoCount(tetrino.getShape());
+	}
+
+	public Tetrino getRandomTetrino() {
+		if (mInventoryArray.isEmpty()) {
+			return null;
+		}
+
+		Tetrino tetrino = mInventoryArray.remove(0);
+		decrementTetrinoCount(tetrino.getShape());
+
+		return tetrino;
 	}
 
 	public void mouseReleased(MouseEvent e) {
