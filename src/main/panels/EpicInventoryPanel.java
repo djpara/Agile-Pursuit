@@ -306,7 +306,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				&& e.getY() <= 127
 				&& e.getY() >= 74) {
 			type = TetrinoType.L;
-			setSelectedTetrino(type, mLCount);
+			setSelectedTetrino(type);
 			return;
 		}
 		// J Pressed
@@ -315,7 +315,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				&& e.getY() <= 129
 				&& e.getY() >= 74) {
 			type = TetrinoType.J;
-			setSelectedTetrino(type, mJCount);
+			setSelectedTetrino(type);
 			return;
 		}
 		// Square Pressed
@@ -324,7 +324,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				&& e.getY() <= 127
 				&& e.getY() >= 91) {
 			type = TetrinoType.SQUARE;
-			setSelectedTetrino(type, mSquareCount);
+			setSelectedTetrino(type);
 			return;
 		}
 		// S Pressed
@@ -333,7 +333,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				&& e.getY() <= 272
 				&& e.getY() >= 218) {
 			type = TetrinoType.S;
-			setSelectedTetrino(type, mSCount);
+			setSelectedTetrino(type);
 			return;
 		}
 		// Z Pressed
@@ -342,7 +342,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				&& e.getY() <= 272
 				&& e.getY() >= 218) {
 			type = TetrinoType.Z;
-			setSelectedTetrino(type, mZCount);
+			setSelectedTetrino(type);
 			return;
 		}
 		// I Pressed
@@ -351,7 +351,7 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				&& e.getY() <= 289
 				&& e.getY() >= 218) {
 			type = TetrinoType.I;
-			setSelectedTetrino(type, mICount);
+			setSelectedTetrino(type);
 			return;
 		}
 		// T Pressed
@@ -360,15 +360,19 @@ public class EpicInventoryPanel extends JPanel implements MouseListener {
 				&& e.getY() <= 273
 				&& e.getY() >= 236) {
 			type = TetrinoType.T;
-			setSelectedTetrino(type, mTCount);
+			setSelectedTetrino(type);
 			return;
 		}
 	}
 
-	private void setSelectedTetrino(TetrinoType type, int currentCount) {
-		if (currentCount > 0) {
-			mGameBoardManager.setSelectedTetrino(type);
-			decrementTetrinoCount(type);
+	private void setSelectedTetrino(TetrinoType type) {
+		for (Tetrino t : mInventoryArray) {
+			if (t.getShape() == type) {
+				mInventoryArray.remove(t);
+				mGameBoardManager.setSelectedTetrino(type);
+				decrementTetrinoCount(type);
+				return;
+			}
 		}
 	}
 
